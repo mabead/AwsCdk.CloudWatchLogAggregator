@@ -1,4 +1,6 @@
 ﻿using Amazon.CDK;
+using Amazon.CDK.AWS.Events;
+using Amazon.CDK.AWS.Events.Targets;
 using Amazon.CDK.AWS.Lambda;
 using System.Collections.Generic;
 using System.IO;
@@ -9,10 +11,24 @@ namespace AwsCdk.CloudWatchLogForwarder
     {
         public Function SetLogGroupExpirationLambda { get; } = null;
 
-        public LogForwarder(Construct scope, string id, LogForwarderProps props = null) 
+        public LogForwarder(Construct scope, string id, LogForwarderProps props = null)
             : base(scope, id)
         {
             props ??= new LogForwarderProps();
+
+            var createLogGroupEventRule = new Rule(this, "CreateLogGroupEvent", new RuleProps {
+                // TODO MAX: name event?
+                RuleName = "LogGroupCreated",
+                Description = "Fires whenever CloudTrail detects that a log group is created",
+                EventPattern = new EventPattern {
+                    Source = new[] { "aws.logs" },
+                    DetailType = new[] { "AWS API Call via CloudTrail" },
+                    Detail = new Dictionary<string, object>
+                    {
+                        { "eventSource", new string[] { "logs.amazonaws.com" } },
+                        { "eventName", new string[] { "CreateLogGroup" } },
+                    }
+                }});
 
             if (props?.CloudWatchLogRetentionInDays != null)
             {
@@ -26,10 +42,12 @@ namespace AwsCdk.CloudWatchLogForwarder
                     MemorySize = 256,
                     Environment = new Dictionary<string, string>
                     {
-                        { "LOG_GROUP_RETENTION", props.CloudWatchLogRetentionInDays.ToString() }
+                        { "retention_days", props.CloudWatchLogRetentionInDays.ToString() }
                     },
                     Code = Code.FromInline(ReadEmbeddedResource("Resources.SetExpiry.js"))
                 });
+
+                createLogGroupEventRule.AddTarget(new LambdaFunction(SetLogGroupExpirationLambda));
             }
         }
 
