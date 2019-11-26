@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwsCdk.CloudWatchLogForward
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo", "demo", "{1DD2C79B-DE20-48B4-A3AE-D8B347551422}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwsCdk.CloudWatchLogForwarder.Demo", "examples\AwsCdk.CloudWatchLogForwarder.Demo\AwsCdk.CloudWatchLogForwarder.Demo.csproj", "{654A653A-2B27-454D-99BC-AE2523F028DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwsCdk.CloudWatchLogForwarder.Demo", "demo\AwsCdk.CloudWatchLogForwarder.Demo\AwsCdk.CloudWatchLogForwarder.Demo.csproj", "{654A653A-2B27-454D-99BC-AE2523F028DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
