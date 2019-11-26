@@ -20,7 +20,10 @@ namespace AwsCdk.CloudWatchLogForwarder.Demo
         static void Main(string[] args)
         {
             var app = new App();
-            new DemoStack(app, "DemoStack");
+            new DemoStack(app, "DemoStack", new StackProps
+            {
+                Env = new Amazon.CDK.Environment { Region = "us-east-1" },
+            });
 
             app.Synth();
         }

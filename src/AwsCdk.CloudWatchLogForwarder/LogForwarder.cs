@@ -28,7 +28,7 @@ namespace AwsCdk.CloudWatchLogForwarder
                     {
                         { "LOG_GROUP_RETENTION", props.CloudWatchLogRetentionInDays.ToString() }
                     },
-                    Code = Code.FromInline(ReadEmbeddedResource("Resources."))
+                    Code = Code.FromInline(ReadEmbeddedResource("Resources.SetExpiry.js"))
                 });
             }
         }
