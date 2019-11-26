@@ -16,6 +16,11 @@ namespace AwsCdk.CloudWatchLogForwarder
         {
             props ??= new LogForwarderProps();
 
+            // The Kinesis stream that will receive all lambda logs.
+            var stream = new Amazon.CDK.AWS.Kinesis.Stream(this, "Stream", props?.KinesisStreamProps);
+
+            // This CloudWatch rule will trigger whenever a new LogGroup is created. This assumes 
+            // that CloudTrail is enabled.
             var createLogGroupEventRule = new Rule(this, "CreateLogGroupEvent", new RuleProps {
                 // TODO MAX: name event?
                 RuleName = "LogGroupCreated",
