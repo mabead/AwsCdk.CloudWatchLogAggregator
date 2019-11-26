@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F971849B-F76A-4858-9F8A-8E5A20BF6B14}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwsCdk.CloudWatchLogForwarder", "src\AwsCdk.CloudWatchLogForwarder\AwsCdk.CloudWatchLogForwarder.csproj", "{A231B73E-5519-4C46-8812-04A755E6CD74}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo", "demo", "{1DD2C79B-DE20-48B4-A3AE-D8B347551422}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwsCdk.CloudWatchLogForwarder.Demo", "examples\AwsCdk.CloudWatchLogForwarder.Demo\AwsCdk.CloudWatchLogForwarder.Demo.csproj", "{654A653A-2B27-454D-99BC-AE2523F028DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A231B73E-5519-4C46-8812-04A755E6CD74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A231B73E-5519-4C46-8812-04A755E6CD74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A231B73E-5519-4C46-8812-04A755E6CD74}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A231B73E-5519-4C46-8812-04A755E6CD74}.Debug|x64.Build.0 = Debug|Any CPU
+		{A231B73E-5519-4C46-8812-04A755E6CD74}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A231B73E-5519-4C46-8812-04A755E6CD74}.Debug|x86.Build.0 = Debug|Any CPU
+		{A231B73E-5519-4C46-8812-04A755E6CD74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A231B73E-5519-4C46-8812-04A755E6CD74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A231B73E-5519-4C46-8812-04A755E6CD74}.Release|x64.ActiveCfg = Release|Any CPU
+		{A231B73E-5519-4C46-8812-04A755E6CD74}.Release|x64.Build.0 = Release|Any CPU
+		{A231B73E-5519-4C46-8812-04A755E6CD74}.Release|x86.ActiveCfg = Release|Any CPU
+		{A231B73E-5519-4C46-8812-04A755E6CD74}.Release|x86.Build.0 = Release|Any CPU
+		{654A653A-2B27-454D-99BC-AE2523F028DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{654A653A-2B27-454D-99BC-AE2523F028DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{654A653A-2B27-454D-99BC-AE2523F028DE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{654A653A-2B27-454D-99BC-AE2523F028DE}.Debug|x64.Build.0 = Debug|Any CPU
+		{654A653A-2B27-454D-99BC-AE2523F028DE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{654A653A-2B27-454D-99BC-AE2523F028DE}.Debug|x86.Build.0 = Debug|Any CPU
+		{654A653A-2B27-454D-99BC-AE2523F028DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{654A653A-2B27-454D-99BC-AE2523F028DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{654A653A-2B27-454D-99BC-AE2523F028DE}.Release|x64.ActiveCfg = Release|Any CPU
+		{654A653A-2B27-454D-99BC-AE2523F028DE}.Release|x64.Build.0 = Release|Any CPU
+		{654A653A-2B27-454D-99BC-AE2523F028DE}.Release|x86.ActiveCfg = Release|Any CPU
+		{654A653A-2B27-454D-99BC-AE2523F028DE}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A231B73E-5519-4C46-8812-04A755E6CD74} = {F971849B-F76A-4858-9F8A-8E5A20BF6B14}
+		{654A653A-2B27-454D-99BC-AE2523F028DE} = {1DD2C79B-DE20-48B4-A3AE-D8B347551422}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {098CB46C-55A6-4E1A-889C-D2A4FFEE3189}
+	EndGlobalSection
+EndGlobal

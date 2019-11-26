@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>library</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\SetExpiry.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\SetExpiry.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Amazon.CDK" Version="1.18.0" />
+    <PackageReference Include="Amazon.CDK.AWS.Lambda" Version="1.18.0" />    
+    <PackageReference Include="Amazon.Jsii.Analyzers" Version="*" PrivateAssets="all" />
+  </ItemGroup>
+  
+</Project>
