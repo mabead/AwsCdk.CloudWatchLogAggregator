@@ -7,10 +7,12 @@
 
   <ItemGroup>
     <None Remove="Resources\SetExpiry.js" />
+    <None Remove="Resources\SubscribeLogGroupsToKinesis.js" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\SetExpiry.js" />
+    <EmbeddedResource Include="Resources\SubscribeLogGroupsToKinesis.js" />
   </ItemGroup>
 
   <ItemGroup>
