@@ -10,11 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\DevNullLogShipper.js" />
     <None Remove="Resources\SetExpiry.js" />
     <None Remove="Resources\SubscribeLogGroupsToKinesis.js" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\DevNullLogShipper.js" />
     <EmbeddedResource Include="Resources\SetExpiry.js" />
     <EmbeddedResource Include="Resources\SubscribeLogGroupsToKinesis.js" />
   </ItemGroup>
@@ -23,6 +25,7 @@
     <PackageReference Include="Amazon.CDK" Version="1.18.0" />
     <PackageReference Include="Amazon.CDK.AWS.Events.Targets" Version="1.18.0" />
     <PackageReference Include="Amazon.CDK.AWS.Kinesis" Version="1.18.0" />
+    <PackageReference Include="Amazon.CDK.AWS.Lambda.EventSources" Version="1.18.0" />
     <PackageReference Include="Amazon.Jsii.Analyzers" Version="*" PrivateAssets="all" />
   </ItemGroup>
   

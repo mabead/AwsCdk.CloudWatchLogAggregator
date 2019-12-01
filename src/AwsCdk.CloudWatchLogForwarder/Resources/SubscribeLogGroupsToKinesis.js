@@ -24,10 +24,10 @@ module.exports.handler = async (event, context) => {
     const logGroupName = event.detail.requestParameters.logGroupName;
     console.log(`log group: ${logGroupName}`);
 
-    if (prefix && !logGroupName.startsWith(prefix)) {
-        console.log(`ignoring the log group [${logGroupName}] because it doesn't match the prefix [${prefix}]`);
-    } else if (excludedLogGroups.includes(logGroupName)) {
+    if (excludedLogGroups.includes(logGroupName)) {
         console.log(`ignoring the log group [${logGroupName}] because it is an excluded log group.`);
+    } else if (prefix && !logGroupName.startsWith(prefix)) {
+        console.log(`ignoring the log group [${logGroupName}] because it doesn't match the prefix [${prefix}]`);
     } else {
         await subscribe(logGroupName);
         console.log(`subscribed [${logGroupName}] to [${arn}]`);

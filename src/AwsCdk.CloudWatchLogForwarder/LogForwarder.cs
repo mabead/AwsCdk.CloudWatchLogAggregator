@@ -3,9 +3,8 @@ using Amazon.CDK.AWS.Events;
 using Amazon.CDK.AWS.Events.Targets;
 using Amazon.CDK.AWS.IAM;
 using Amazon.CDK.AWS.Lambda;
-using System;
+using Amazon.CDK.AWS.Lambda.EventSources;
 using System.Collections.Generic;
-using System.IO;
 
 namespace AwsCdk.CloudWatchLogForwarder
 {
@@ -19,6 +18,14 @@ namespace AwsCdk.CloudWatchLogForwarder
         {
             // The Kinesis stream that will receive all lambda logs.
             var kinesisStream = new Amazon.CDK.AWS.Kinesis.Stream(this, "Stream", props.KinesisStreamProps);
+
+            // Forward all records from kinesis to the log shipper.
+            props.LogShipper.AddEventSource(new KinesisEventSource(kinesisStream, 
+                new KinesisEventSourceProps {
+                    BatchSize = 1, // TODO MAX
+                    MaxBatchingWindow = Duration.Seconds(1),
+                    StartingPosition = StartingPosition.TRIM_HORIZON, // TODO MAX
+                }));
 
             // We now create a role that can be assumed by CloudWatch logs to put records in Kinesis
             //
@@ -67,11 +74,13 @@ namespace AwsCdk.CloudWatchLogForwarder
                     {
                         { "retention_days", props.CloudWatchLogRetentionInDays.Value.ToString() }
                     },
-                    Code = Code.FromInline(ReadEmbeddedResource("Resources.SetExpiry.js"))
+                    Code = Code.FromInline(EmbeddedResourceReader.Read("Resources.SetExpiry.js"))
                 });
 
                 createLogGroupEventRule.AddTarget(new LambdaFunction(SetLogGroupExpirationLambda));
             }
+
+            var excludedLogGroups = props.LogShipper == null ? "" : $"/aws/lambda/{props.LogShipper.FunctionName}";
 
             // This function will be invoked whenever a CloudWatch log group is created. It will
             // subscribe the log group to our Kinesis Data Stream so that all logs end up in the 
@@ -89,9 +98,9 @@ namespace AwsCdk.CloudWatchLogForwarder
                     { "arn",                    kinesisStream.StreamArn },
                     { "role_arn",               cloudWatchLogsToKinesisRole.RoleArn },
                     { "prefix",                 "/aws/lambda/_max" }, // TODO MAX
-                    { "excluded_log_groups",    "/aws/lambda/_maxLambda1" }, 
+                    { "excluded_log_groups",    excludedLogGroups }, 
                 },
-                Code = Code.FromInline(ReadEmbeddedResource("Resources.SubscribeLogGroupsToKinesis.js"))
+                Code = Code.FromInline(EmbeddedResourceReader.Read("Resources.SubscribeLogGroupsToKinesis.js"))
             });
 
             SubscribeLogGroupsToKinesisLambda.AddToRolePolicy(new PolicyStatement(new PolicyStatementProps
@@ -109,26 +118,6 @@ namespace AwsCdk.CloudWatchLogForwarder
             }));
 
             createLogGroupEventRule.AddTarget(new LambdaFunction(SubscribeLogGroupsToKinesisLambda));
-        }
-
-        private string ReadEmbeddedResource(string resourcePath)
-        {
-            var assembly = GetType().Assembly;
-            var assemblyName = assembly.GetName();
-            var fullPath = $"{assemblyName.Name}.{resourcePath}";
-
-            using (var stream = assembly.GetManifestResourceStream(fullPath))
-            {
-                if (stream == null)
-                {
-                    throw new NotSupportedException($"Embedded resource {resourcePath} was not found.");
-                }
-
-                using (var reader = new StreamReader(stream))
-                {
-                    return reader.ReadToEnd();
-                }
-            }
         }
     }
 }

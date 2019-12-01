@@ -10,6 +10,7 @@ namespace AwsCdk.CloudWatchLogForwarder.Demo
         {
             var logForwarder = new LogForwarder(this, "Forwarder", 
                 new LogForwarderProps(
+                    logShipper: LogShipper.CreateDevNullLogShipper(this),
                     cloudWatchLogRetentionInDays: 5
                 ));
         }
