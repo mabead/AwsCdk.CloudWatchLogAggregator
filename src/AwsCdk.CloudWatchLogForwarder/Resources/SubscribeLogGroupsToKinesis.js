@@ -3,6 +3,7 @@ const cloudWatchLogs = new AWS.CloudWatchLogs();
 const arn = process.env.arn;
 const role_arn = process.env.role_arn;
 const prefix = process.env.prefix;
+const excludedLogGroups = (process.env.excluded_log_groups || '').split(';').filter(n => n);
 
 const subscribe = async (logGroupName) => {
     let options = {
@@ -25,6 +26,8 @@ module.exports.handler = async (event, context) => {
 
     if (prefix && !logGroupName.startsWith(prefix)) {
         console.log(`ignoring the log group [${logGroupName}] because it doesn't match the prefix [${prefix}]`);
+    } else if (excludedLogGroups.includes(logGroupName)) {
+        console.log(`ignoring the log group [${logGroupName}] because it is an excluded log group.`);
     } else {
         await subscribe(logGroupName);
         console.log(`subscribed [${logGroupName}] to [${arn}]`);

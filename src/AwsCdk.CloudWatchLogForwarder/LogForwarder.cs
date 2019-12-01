@@ -3,6 +3,7 @@ using Amazon.CDK.AWS.Events;
 using Amazon.CDK.AWS.Events.Targets;
 using Amazon.CDK.AWS.IAM;
 using Amazon.CDK.AWS.Lambda;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -10,16 +11,14 @@ namespace AwsCdk.CloudWatchLogForwarder
 {
     public class LogForwarder : Construct
     {
-        public Function SetLogGroupExpirationLambda { get; } = null;
-        public Function SubscribeLogGroupsToKinesisLambda { get; } = null;
+        public Function? SetLogGroupExpirationLambda { get; }
+        public Function SubscribeLogGroupsToKinesisLambda { get; }
 
-        public LogForwarder(Construct scope, string id, LogForwarderProps props = null)
+        public LogForwarder(Construct scope, string id, LogForwarderProps props)
             : base(scope, id)
         {
-            props ??= new LogForwarderProps();
-
             // The Kinesis stream that will receive all lambda logs.
-            var kinesisStream = new Amazon.CDK.AWS.Kinesis.Stream(this, "Stream", props?.KinesisStreamProps);
+            var kinesisStream = new Amazon.CDK.AWS.Kinesis.Stream(this, "Stream", props.KinesisStreamProps);
 
             // We now create a role that can be assumed by CloudWatch logs to put records in Kinesis
             //
@@ -54,7 +53,7 @@ namespace AwsCdk.CloudWatchLogForwarder
                     }
                 }});
 
-            if (props?.CloudWatchLogRetentionInDays != null)
+            if (props.CloudWatchLogRetentionInDays.HasValue)
             {
                 SetLogGroupExpirationLambda = new Function(this, "SetLogGroupExpiration", new FunctionProps
                 {
@@ -66,7 +65,7 @@ namespace AwsCdk.CloudWatchLogForwarder
                     MemorySize = 128,
                     Environment = new Dictionary<string, string>
                     {
-                        { "retention_days", props.CloudWatchLogRetentionInDays.ToString() }
+                        { "retention_days", props.CloudWatchLogRetentionInDays.Value.ToString() }
                     },
                     Code = Code.FromInline(ReadEmbeddedResource("Resources.SetExpiry.js"))
                 });
@@ -87,9 +86,10 @@ namespace AwsCdk.CloudWatchLogForwarder
                 MemorySize = 128,
                 Environment = new Dictionary<string, string>
                 {
-                    { "arn", kinesisStream.StreamArn },
-                    { "role_arn", cloudWatchLogsToKinesisRole.RoleArn },
-                    { "prefix", "/aws/lambda/_max" }, // TODO MAX
+                    { "arn",                    kinesisStream.StreamArn },
+                    { "role_arn",               cloudWatchLogsToKinesisRole.RoleArn },
+                    { "prefix",                 "/aws/lambda/_max" }, // TODO MAX
+                    { "excluded_log_groups",    "/aws/lambda/_maxLambda1" }, 
                 },
                 Code = Code.FromInline(ReadEmbeddedResource("Resources.SubscribeLogGroupsToKinesis.js"))
             });
@@ -118,9 +118,16 @@ namespace AwsCdk.CloudWatchLogForwarder
             var fullPath = $"{assemblyName.Name}.{resourcePath}";
 
             using (var stream = assembly.GetManifestResourceStream(fullPath))
-            using (var reader = new StreamReader(stream))
             {
-                return reader.ReadToEnd();
+                if (stream == null)
+                {
+                    throw new NotSupportedException($"Embedded resource {resourcePath} was not found.");
+                }
+
+                using (var reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
             }
         }
     }

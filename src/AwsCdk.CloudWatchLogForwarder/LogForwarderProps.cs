@@ -17,9 +17,9 @@ namespace AwsCdk.CloudWatchLogForwarder
         /// The properties of the Kinesis stream that will hold the CloudWatch events. When not
         /// provided, the defaults of the AWS CDK will be used.
         /// </summary>
-        public IStreamProps KinesisStreamProps { get; } 
+        public IStreamProps? KinesisStreamProps { get; } 
 
-        public LogForwarderProps(IStreamProps kinesisStreamProps = null, int? cloudWatchLogRetentionInDays = 7)
+        public LogForwarderProps(IStreamProps? kinesisStreamProps = null, int? cloudWatchLogRetentionInDays = 7)
         {
             KinesisStreamProps = kinesisStreamProps;
             CloudWatchLogRetentionInDays = cloudWatchLogRetentionInDays;

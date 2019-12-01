@@ -5,7 +5,7 @@ namespace AwsCdk.CloudWatchLogForwarder.Demo
 {
     public class DemoStack : Stack
     {
-        internal DemoStack(Construct scope, string id, IStackProps props = null) 
+        internal DemoStack(Construct scope, string id, IStackProps? props = null) 
             : base(scope, id, props)
         {
             var logForwarder = new LogForwarder(this, "Forwarder", 

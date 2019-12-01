@@ -3,6 +3,10 @@
   <PropertyGroup>
     <OutputType>library</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <NoWarn>1701;1702;CS8032</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
