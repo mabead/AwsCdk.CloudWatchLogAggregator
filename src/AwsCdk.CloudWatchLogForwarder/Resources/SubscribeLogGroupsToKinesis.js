@@ -4,13 +4,14 @@ const arn = process.env.arn;
 const role_arn = process.env.role_arn;
 const prefix = process.env.prefix;
 const excludedLogGroups = (process.env.excluded_log_groups || '').split(';').filter(n => n);
+const filterPatern = process.env.filter_pattern;
 
 const subscribe = async (logGroupName) => {
     let options = {
         destinationArn: arn,
         logGroupName: logGroupName,
         filterName: 'ship-logs',
-        filterPattern: '[timestamp=*Z, request_id="*-*", event]',
+        filterPattern: filterPattern,
         roleArn: role_arn,
     };
 

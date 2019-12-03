@@ -98,7 +98,8 @@ namespace AwsCdk.CloudWatchLogForwarder
                     { "arn",                    kinesisStream.StreamArn },
                     { "role_arn",               cloudWatchLogsToKinesisRole.RoleArn },
                     { "prefix",                 "/aws/lambda/_max" }, // TODO MAX
-                    { "excluded_log_groups",    excludedLogGroups }, 
+                    { "excluded_log_groups",    excludedLogGroups },
+                    { "filter_pattern",         props.CloudWatchLogsFilterPattern.ToString() },
                 },
                 Code = Code.FromInline(EmbeddedResourceReader.Read("Resources.SubscribeLogGroupsToKinesis.js"))
             });
