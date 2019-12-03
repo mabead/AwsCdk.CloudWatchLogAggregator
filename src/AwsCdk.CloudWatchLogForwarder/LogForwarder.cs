@@ -72,7 +72,8 @@ namespace AwsCdk.CloudWatchLogForwarder
                     MemorySize = 128,
                     Environment = new Dictionary<string, string>
                     {
-                        { "retention_days", props.CloudWatchLogRetentionInDays.Value.ToString() }
+                        { "retention_days",     props.CloudWatchLogRetentionInDays.Value.ToString() },
+                        { "prefix",             props.LogGroupsPrefix },
                     },
                     Code = Code.FromInline(EmbeddedResourceReader.Read("Resources.SetExpiry.js"))
                 });
@@ -97,7 +98,7 @@ namespace AwsCdk.CloudWatchLogForwarder
                 {
                     { "arn",                    kinesisStream.StreamArn },
                     { "role_arn",               cloudWatchLogsToKinesisRole.RoleArn },
-                    { "prefix",                 "/aws/lambda/_max" }, // TODO MAX
+                    { "prefix",                 props.LogGroupsPrefix },
                     { "excluded_log_groups",    excludedLogGroups },
                     { "filter_pattern",         props.CloudWatchLogsFilterPattern.ToString() },
                 },

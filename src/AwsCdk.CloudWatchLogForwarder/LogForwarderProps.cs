@@ -20,6 +20,13 @@ namespace AwsCdk.CloudWatchLogForwarder
         public int? CloudWatchLogRetentionInDays { get; }
 
         /// <summary>
+        /// The log forwarder will only manage the log groups that start with this prefix. 
+        /// Managing a log group implies: settings its retention policy and forwarding the 
+        /// logs to the log shipper lambda function.
+        /// </summary>
+        public string LogGroupsPrefix { get; }
+
+        /// <summary>
         /// Only the CloudWatch logs that respect this filter pattern will be forwarded to the log shipper lambda function.
         /// </summary>
         public string CloudWatchLogsFilterPattern { get; }
@@ -36,18 +43,21 @@ namespace AwsCdk.CloudWatchLogForwarder
         /// <param name="logShipper"></param>
         /// <param name="kinesisStreamProps"></param>
         /// <param name="cloudWatchLogRetentionInDays"></param>
+        /// <param name="logGroupsPrefix">The log forwarder will only manage the log groups that start with this prefix. Managing a log group implies: settings its retention policy and forwarding the logs to the log shipper lambda function. The default value is "/aws/lambda/".</param>
         /// <param name="cloudWatchLogsFilterPattern">Only the CloudWatch logs that respect this filter pattern will be forwarded to the log shipper lambda function. The default value is: -"START RequestId: " -"END RequestId: " -"REPORT RequestId: "</param>
         public LogForwarderProps
         (
             Function logShipper, 
             IStreamProps? kinesisStreamProps = null, 
             int? cloudWatchLogRetentionInDays = 7,
+            string logGroupsPrefix = "/aws/lambda/",
             string cloudWatchLogsFilterPattern = @"-""START RequestId: "" -""END RequestId: "" -""REPORT RequestId: """
         )
         {
             LogShipper = logShipper;
             KinesisStreamProps = kinesisStreamProps;
             CloudWatchLogRetentionInDays = cloudWatchLogRetentionInDays;
+            LogGroupsPrefix = logGroupsPrefix;
             CloudWatchLogsFilterPattern = cloudWatchLogsFilterPattern;
         }
     }

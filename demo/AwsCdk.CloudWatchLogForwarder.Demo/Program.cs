@@ -11,6 +11,7 @@ namespace AwsCdk.CloudWatchLogForwarder.Demo
             var logForwarder = new LogForwarder(this, "Forwarder", 
                 new LogForwarderProps(
                     logShipper: LogShipper.CreateDevNullLogShipper(this),
+                    logGroupsPrefix: "/aws/lambda/_max", // TODO MAX
                     cloudWatchLogRetentionInDays: 5
                 ));
         }
