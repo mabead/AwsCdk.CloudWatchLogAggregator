@@ -9,12 +9,18 @@ function parsePayload(record) {
 const getRecords = (event) => event.Records.map(parsePayload);
 
 module.exports.handler = async (event, context) => {
+    // See the comments in DevNullLogShipper.PayloadExample.txt
+    // to understand what is in the 'event' object.
     try {
 
-        console.log('before parsing: ' + JSON.stringify(event));
+        for (let kinesisRecord of event.Records) {
 
-        const records = getRecords(event);
-        console.log('after parsing: ' + JSON.stringify(records));
+            let logMessage = parsePayload(kinesisRecord);
+
+            if (logMessage.messageType === "DATA_MESSAGE") {
+                console.log(`${logMessage.logGroup} : ${logMessage.logStream} => Contains ${logMessage.logEvents.length} messages.`);
+            }
+        }
 
     } catch (err) {
         // swallow exception so the stream can move on

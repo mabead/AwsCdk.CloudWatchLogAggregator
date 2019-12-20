@@ -23,7 +23,7 @@ namespace AwsCdk.CloudWatchLogForwarder
             props.LogShipper.AddEventSource(new KinesisEventSource(kinesisStream, 
                 new KinesisEventSourceProps {
                     BatchSize = 1, // TODO MAX
-                    MaxBatchingWindow = Duration.Seconds(1),
+                    MaxBatchingWindow = Duration.Seconds(1), // TODO MAX
                     StartingPosition = StartingPosition.TRIM_HORIZON, // TODO MAX
                 }));
 
