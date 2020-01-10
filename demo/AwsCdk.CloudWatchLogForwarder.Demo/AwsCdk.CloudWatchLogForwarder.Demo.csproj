@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\AwsCdk.CloudWatchLogForwarder\AwsCdk.CloudWatchLogForwarder.csproj" />
-    <PackageReference Include="Amazon.Jsii.Analyzers" Version="*" PrivateAssets="all" />
+    <!--<PackageReference Include="Amazon.Jsii.Analyzers" Version="0.21.1" PrivateAssets="all" />-->
   </ItemGroup>
 
 </Project>

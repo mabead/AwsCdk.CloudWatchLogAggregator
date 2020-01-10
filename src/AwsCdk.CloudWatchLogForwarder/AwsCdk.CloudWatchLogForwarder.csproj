@@ -22,11 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Amazon.CDK" Version="1.18.0" />
-    <PackageReference Include="Amazon.CDK.AWS.Events.Targets" Version="1.18.0" />
-    <PackageReference Include="Amazon.CDK.AWS.Kinesis" Version="1.18.0" />
-    <PackageReference Include="Amazon.CDK.AWS.Lambda.EventSources" Version="1.18.0" />
-    <PackageReference Include="Amazon.Jsii.Analyzers" Version="*" PrivateAssets="all" />
+    <PackageReference Include="Amazon.CDK" Version="1.20.0" />
+    <PackageReference Include="Amazon.CDK.AWS.Events.Targets" Version="1.20.0" />
+    <PackageReference Include="Amazon.CDK.AWS.Kinesis" Version="1.20.0" />
+    <PackageReference Include="Amazon.CDK.AWS.Lambda.EventSources" Version="1.20.0" />
+    <!--<PackageReference Include="Amazon.Jsii.Analyzers" Version="0.21.1" PrivateAssets="all" />-->
   </ItemGroup>
   
 </Project>
