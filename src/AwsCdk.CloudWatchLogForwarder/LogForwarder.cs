@@ -22,9 +22,9 @@ namespace AwsCdk.CloudWatchLogForwarder
             // Forward all records from kinesis to the log shipper.
             props.LogShipper.AddEventSource(new KinesisEventSource(kinesisStream, 
                 new KinesisEventSourceProps {
-                    BatchSize = 1, // TODO MAX
-                    MaxBatchingWindow = Duration.Seconds(1), // TODO MAX
-                    StartingPosition = StartingPosition.TRIM_HORIZON, // TODO MAX
+                    BatchSize = props.KinesisBatchSize,
+                    MaxBatchingWindow = props.KinesisMaxBatchingWindow,
+                    StartingPosition = StartingPosition.TRIM_HORIZON,
                 }));
 
             // We now create a role that can be assumed by CloudWatch logs to put records in Kinesis
@@ -47,8 +47,6 @@ namespace AwsCdk.CloudWatchLogForwarder
             // This CloudWatch rule will trigger whenever a new LogGroup is created. This assumes 
             // that CloudTrail is enabled.
             var createLogGroupEventRule = new Rule(this, "CreateLogGroupEvent", new RuleProps {
-                // TODO MAX: name event?
-                RuleName = "LogGroupCreated",
                 Description = "Fires whenever CloudTrail detects that a log group is created",
                 EventPattern = new EventPattern {
                     Source = new[] { "aws.logs" },
@@ -64,8 +62,6 @@ namespace AwsCdk.CloudWatchLogForwarder
             {
                 SetLogGroupExpirationLambda = new Function(this, "SetLogGroupExpiration", new FunctionProps
                 {
-                    // TODO MAX: function name
-                    FunctionName = "SetLogGroupExpiration",
                     Runtime = Runtime.NODEJS_10_X,
                     Handler = "index.handler",
                     Description = $"Sets the log retention policy to {props.CloudWatchLogRetentionInDays} days when a log group is created.",
@@ -88,8 +84,6 @@ namespace AwsCdk.CloudWatchLogForwarder
             // DataStream.
             SubscribeLogGroupsToKinesisLambda = new Function(this, "SubscribeLogGroupsToKinesis", new FunctionProps
             {
-                // TODO MAX: function name?
-                FunctionName = "SubscribeLogGroupsToKinesis",
                 Runtime = Runtime.NODEJS_10_X,
                 Handler = "index.handler",
                 Description = "Subscribe logs to the Kinesis stream",

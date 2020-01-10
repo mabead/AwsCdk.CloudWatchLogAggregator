@@ -9,11 +9,9 @@ namespace AwsCdk.CloudWatchLogForwarder
         {
             return new Function(scope, "DevNullLogShipper", new FunctionProps
             {
-                // TODO MAX: function name?
-                FunctionName = "DevNullLogShipper",
                 Runtime = Runtime.NODEJS_10_X,
                 Handler = "index.handler",
-                Description = "Forwards kinesis records to nowhere.",
+                Description = "Forwards kinesis records to nowhere. It simply logs that it received something.",
                 MemorySize = 128,
                 Code = Code.FromInline(EmbeddedResourceReader.Read("Resources.DevNullLogShipper.js"))
             });

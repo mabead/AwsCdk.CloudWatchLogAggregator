@@ -1,4 +1,5 @@
-﻿using Amazon.CDK.AWS.Kinesis;
+﻿using Amazon.CDK;
+using Amazon.CDK.AWS.Kinesis;
 using Amazon.CDK.AWS.Lambda;
 
 namespace AwsCdk.CloudWatchLogForwarder
@@ -38,6 +39,16 @@ namespace AwsCdk.CloudWatchLogForwarder
         public IStreamProps? KinesisStreamProps { get; }
 
         /// <summary>
+        /// The size of the batches that are sent from Kinesis to the Lambda. See https://docs.aws.amazon.com/cdk/api/latest/docs/@aws-cdk_aws-lambda-event-sources.KinesisEventSourceProps.html#batchsize for more details.
+        /// </summary>
+        public double? KinesisBatchSize { get; set; }
+
+        /// <summary>
+        /// The maximum amount of time to gather records in the Kinesis data stream before invoking the log shipper function. See https://docs.aws.amazon.com/cdk/api/latest/docs/@aws-cdk_aws-lambda-event-sources.KinesisEventSourceProps.html#maxbatchingwindow for more details.
+        /// </summary>
+        public Duration? KinesisMaxBatchingWindow { get; set; }
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="logShipper"></param>
@@ -51,7 +62,9 @@ namespace AwsCdk.CloudWatchLogForwarder
             IStreamProps? kinesisStreamProps = null, 
             int? cloudWatchLogRetentionInDays = 7,
             string logGroupsPrefix = "/aws/lambda/",
-            string cloudWatchLogsFilterPattern = @"-""START RequestId: "" -""END RequestId: "" -""REPORT RequestId: """
+            string cloudWatchLogsFilterPattern = @"-""START RequestId: "" -""END RequestId: "" -""REPORT RequestId: """,
+            double? kinesisBatchSize = null,
+            Duration? kinesisMaxBatchingWindow = null
         )
         {
             LogShipper = logShipper;
@@ -59,6 +72,8 @@ namespace AwsCdk.CloudWatchLogForwarder
             CloudWatchLogRetentionInDays = cloudWatchLogRetentionInDays;
             LogGroupsPrefix = logGroupsPrefix;
             CloudWatchLogsFilterPattern = cloudWatchLogsFilterPattern;
+            KinesisBatchSize = kinesisBatchSize;
+            KinesisMaxBatchingWindow = kinesisMaxBatchingWindow;
         }
     }
 }
