@@ -8,11 +8,26 @@ using System.Collections.Generic;
 
 namespace AwsCdk.CloudWatchLogForwarder
 {
+    /// <summary>
+    /// The 'LogForwarder' CDK construct is responsible to *create*
+    /// the following AWS resources:
+    /// 
+    ///  - The Kinesis Data stream that will aggregate the CloudWatch logs
+    ///  - The Lambda that automatically sets the CloudWatch retention period when new lambdas are created.
+    ///  - The Lambda that automatically registers the lambda CloudWatch log group to the Kinesis Data stream when new lambdas are created.
+    ///  
+    /// And finally, it register a 'log shipper' lambda that is invoked with the data that ends up the Kinesis Data stream.
+    ///  
+    /// IMPORTANT NOTE: This construct assumes that CloudTrail is enabled in your AWS environment.
+    /// </summary>
     public class LogForwarder : Construct
     {
-        public Function? SetLogGroupExpirationLambda { get; }
-        public Function SubscribeLogGroupsToKinesisLambda { get; }
-
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="scope"></param>
+        /// <param name="id"></param>
+        /// <param name="props"></param>
         public LogForwarder(Construct scope, string id, LogForwarderProps props)
             : base(scope, id)
         {
@@ -27,17 +42,14 @@ namespace AwsCdk.CloudWatchLogForwarder
                     StartingPosition = StartingPosition.TRIM_HORIZON,
                 }));
 
-            // We now create a role that can be assumed by CloudWatch logs to put records in Kinesis
-            //
-            //    A policy contains a list of policy statements. The policy can then be assigned to a role.
-            //
+            // Create a role (containing a policy) that can be assumed by CloudWatch logs to put records in Kinesis. 
             var statement = new PolicyStatement();
             statement.AddActions(new[] { "kinesis:PutRecords", "kinesis:PutRecord" });
             statement.AddResources(new[] { kinesisStream.StreamArn });
 
             var cloudWatchLogsToKinesisRole = new Role(this, "CloudWatchLogsToKinesis", new RoleProps
             {
-                AssumedBy = new ServicePrincipal("logs.amazonaws.com"),
+                AssumedBy = new ServicePrincipal("logs.amazonaws.com")
             });
             cloudWatchLogsToKinesisRole.AttachInlinePolicy(new Policy(this, "CanPutRecordsInKinesis", new PolicyProps
             {
@@ -60,7 +72,7 @@ namespace AwsCdk.CloudWatchLogForwarder
 
             if (props.CloudWatchLogRetentionInDays.HasValue)
             {
-                SetLogGroupExpirationLambda = new Function(this, "SetLogGroupExpiration", new FunctionProps
+                var setLogGroupExpirationLambda = new Function(this, "SetLogGroupExpiration", new FunctionProps
                 {
                     Runtime = Runtime.NODEJS_10_X,
                     Handler = "index.handler",
@@ -74,7 +86,7 @@ namespace AwsCdk.CloudWatchLogForwarder
                     Code = Code.FromInline(EmbeddedResourceReader.Read("Resources.SetExpiry.js"))
                 });
 
-                createLogGroupEventRule.AddTarget(new LambdaFunction(SetLogGroupExpirationLambda));
+                createLogGroupEventRule.AddTarget(new LambdaFunction(setLogGroupExpirationLambda));
             }
 
             var excludedLogGroups = props.LogShipper == null ? "" : $"/aws/lambda/{props.LogShipper.FunctionName}";
@@ -82,7 +94,7 @@ namespace AwsCdk.CloudWatchLogForwarder
             // This function will be invoked whenever a CloudWatch log group is created. It will
             // subscribe the log group to our Kinesis Data Stream so that all logs end up in the 
             // DataStream.
-            SubscribeLogGroupsToKinesisLambda = new Function(this, "SubscribeLogGroupsToKinesis", new FunctionProps
+            var subscribeLogGroupsToKinesisLambda = new Function(this, "SubscribeLogGroupsToKinesis", new FunctionProps
             {
                 Runtime = Runtime.NODEJS_10_X,
                 Handler = "index.handler",
@@ -99,21 +111,21 @@ namespace AwsCdk.CloudWatchLogForwarder
                 Code = Code.FromInline(EmbeddedResourceReader.Read("Resources.SubscribeLogGroupsToKinesis.js"))
             });
 
-            SubscribeLogGroupsToKinesisLambda.AddToRolePolicy(new PolicyStatement(new PolicyStatementProps
+            subscribeLogGroupsToKinesisLambda.AddToRolePolicy(new PolicyStatement(new PolicyStatementProps
             {
                 Effect = Effect.ALLOW,
                 Actions = new [] { "logs:PutSubscriptionFilter" },
                 Resources = new[] { "*" },
             }));
 
-            SubscribeLogGroupsToKinesisLambda.AddToRolePolicy(new PolicyStatement(new PolicyStatementProps
+            subscribeLogGroupsToKinesisLambda.AddToRolePolicy(new PolicyStatement(new PolicyStatementProps
             {
                 Effect = Effect.ALLOW,
                 Actions = new[] { "iam:PassRole" },
                 Resources = new[] { "*" },
             }));
 
-            createLogGroupEventRule.AddTarget(new LambdaFunction(SubscribeLogGroupsToKinesisLambda));
+            createLogGroupEventRule.AddTarget(new LambdaFunction(subscribeLogGroupsToKinesisLambda));
         }
     }
 }

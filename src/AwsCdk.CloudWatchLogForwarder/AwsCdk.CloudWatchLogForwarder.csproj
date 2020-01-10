@@ -17,6 +17,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <PackageTags>aws,cdk</PackageTags>
+    <DocumentationFile>bin\$(Configuration)\AwsCdk.CloudWatchLogForwarder.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

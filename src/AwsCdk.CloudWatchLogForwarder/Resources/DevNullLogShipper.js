@@ -6,8 +6,6 @@ function parsePayload(record) {
     return JSON.parse(json);
 }
 
-const getRecords = (event) => event.Records.map(parsePayload);
-
 module.exports.handler = async (event, context) => {
     // See the comments in DevNullLogShipper.PayloadExample.txt
     // to understand what is in the 'event' object.

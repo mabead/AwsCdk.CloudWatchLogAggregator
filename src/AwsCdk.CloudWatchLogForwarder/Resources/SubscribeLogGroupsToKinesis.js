@@ -1,4 +1,6 @@
-﻿const AWS = require('aws-sdk');
+﻿// Code taken from here: https://github.com/theburningmonk/lambda-logging-kinesis-demo/blob/master/functions/subscribe/handler.js
+
+const AWS = require('aws-sdk');
 const cloudWatchLogs = new AWS.CloudWatchLogs();
 const arn = process.env.arn;
 const role_arn = process.env.role_arn;

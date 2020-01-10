@@ -1,87 +1,87 @@
-        // 'event' contains a payload that looks like this:
-        //
-        //    {
-        //        "Records": [
-        //            {
-        //                "kinesis": {
-        //                    "kinesisSchemaVersion": "1.0",
-        //                    "partitionKey": "a12c3a3d423fde335ac7bd3a7a86adf5",
-        //                    "sequenceNumber": "49601761752797083658832874449062197279326780636178415618",
-        //                    "data": "H4sIAAAAAAAAAI2TS2/bMBCE/4vQYwrvLrmv3AzUzSU92bc0CORaTQz4BctpWgT57x2l6KWoAF0kiqT47cwOX5t91/ftY7f6deqa6+bTfDV/+LJYLuc3i+aqOb4cujOmNViUQqNyYnp3fLw5H59PWJm1L/1s1+7Xm3b2sG9/3r4PV11/0T8bl5dz1+6xU4hzxjKjOrv7cDtfLZar+zV7Xa+7KC11tY2INkWjlfZ7bLjoBkf0z+v+23l7umyPh8/b3aU79831XdM/bU8fcXzf3L9jFj+6w2VYeW22G9CKcilcTT2JPIVSzMMzpUStUjMtiDmHt4i7SmXmYiBetvDk0u4hj9UVm92TS1z99QrHP3W73fHroXm7+peXlqywqQgLBYW4OXmwh3oFwEiUnbRaKEeM8bLyJJ6xuJhVN7M0k6zAVHEiCXxgmKihetYgGtUXZErTeBKUHMZM4VoiC74AZdTBKZmDqQQztZC51REeDstpvCqiEqUWyoChJQ2tEJLEUzDrwlXDWcLR4xE/g9PrNJ4qubqJZ6Rr1iE7QgWL8BMDBVnQZzaGnzLCE60T9ZlzKKyqlR19ADmM1EWGfCAqGmkiZagG0RnzE+7INB6sFCJCwKzATsss+FlFoLZ4SQQY0nEfUFf4WF6GFkzjJS5AJRHGtcOYeGhdhqWiXwl3ocrAhlpYPKavysS8DHfN2GQQCsvQq8E/juKWQQorUQHlkButEDHGS7b/8u7ffgPdUwCrMwUAAA==",
-        //                    "approximateArrivalTimestamp": 1575424794.96
-        //                },
-        //                "eventSource": "aws:kinesis",
-        //                "eventVersion": "1.0",
-        //                "eventID": "shardId-000000000000:49601761752797083658832874449062197279326780636178415618",
-        //                "eventName": "aws:kinesis:record",
-        //                "invokeIdentityArn": "arn:aws:iam::581250858419:role/CloudWatchLogForwarderDem-DevNullLogShipperService-1SNPAKYBP6PBA",
-        //                "awsRegion": "us-east-1",
-        //                "eventSourceARN": "arn:aws:kinesis:us-east-1:581250858419:stream/CloudWatchLogForwarderDemo-ForwarderStreamC7ED6520-1RTX5J5CPJUO0"
-        //            }
-        //        ]
-        //    }
-        //
-        // After decoding the 'Records[].kinesis.data property, we get something that looks like this:
-        //
-        //   {
-        //       "messageType": "DATA_MESSAGE",
-        //       "owner": "581250858419",
-        //       "logGroup": "/aws/lambda/_maxLambdaTest5",
-        //       "logStream": "2019/12/04/[$LATEST]b174bbe83a0e4a888a9258a2af8d135d",
-        //       "subscriptionFilters": [
-        //           "ship-logs"
-        //       ],
-        //       "logEvents": [
-        //           {
-        //               "id": "35133146579007920926787992384424996801199968227752411136",
-        //               "timestamp": 1575424779138,
-        //               "message": "hello\n"
-        //           },
-        //           {
-        //               "id": "35133146596915419321208082767078178574136602517054685188",
-        //               "timestamp": 1575424779941,
-        //               "message": "hello\n"
-        //           },
-        //           {
-        //               "id": "35133146612726647666966294574427002829444290824794800136",
-        //               "timestamp": 1575424780650,
-        //               "message": "hello\n"
-        //           },
-        //           {
-        //               "id": "35133146628091861108753893918945112719299011902415306764",
-        //               "timestamp": 1575424781339,
-        //               "message": "hello\n"
-        //           },
-        //           {
-        //               "id": "35133146642252834309820839613820293822430721458712870928",
-        //               "timestamp": 1575424781974,
-        //               "message": "hello\n"
-        //           },
-        //           {
-        //               "id": "35133146655075762798975947920203331829203529324651610132",
-        //               "timestamp": 1575424782549,
-        //               "message": "hello\n"
-        //           },
-        //           {
-        //               "id": "35133146667185067441778076286057226851251589622398976024",
-        //               "timestamp": 1575424783092,
-        //               "message": "hello\n"
-        //           },
-        //           {
-        //               "id": "35133146683420009946308369933095229753739596798752718876",
-        //               "timestamp": 1575424783820,
-        //               "message": "hello\n"
-        //           },
-        //           {
-        //               "id": "35133146692764022184492701029398695709979260269758513184",
-        //               "timestamp": 1575424784239,
-        //               "message": "hello\n"
-        //           },
-        //           {
-        //               "id": "35133146707861626683897932896218376980562201009307254820",
-        //               "timestamp": 1575424784916,
-        //               "message": "hello\n"
-        //           }
-        //       ]
-        //   }
-        //
+// 'event' contains a payload that looks like this:
+	
+	{
+	    "Records": [
+	        {
+	            "kinesis": {
+	                "kinesisSchemaVersion": "1.0",
+	                "partitionKey": "a12c3a3d423fde335ac7bd3a7a86adf5",
+	                "sequenceNumber": "49601761752797083658832874449062197279326780636178415618",
+	                "data": "H4sIAAAAAAAAAI2TS2/bMBCE/4vQYwrvLrmv3AzUzSU92bc0CORaTQz4BctpWgT57x2l6KWoAF0kiqT47cwOX5t91/ftY7f6deqa6+bTfDV/+LJYLuc3i+aqOb4cujOmNViUQqNyYnp3fLw5H59PWJm1L/1s1+7Xm3b2sG9/3r4PV11/0T8bl5dz1+6xU4hzxjKjOrv7cDtfLZar+zV7Xa+7KC11tY2INkWjlfZ7bLjoBkf0z+v+23l7umyPh8/b3aU79831XdM/bU8fcXzf3L9jFj+6w2VYeW22G9CKcilcTT2JPIVSzMMzpUStUjMtiDmHt4i7SmXmYiBetvDk0u4hj9UVm92TS1z99QrHP3W73fHroXm7+peXlqywqQgLBYW4OXmwh3oFwEiUnbRaKEeM8bLyJJ6xuJhVN7M0k6zAVHEiCXxgmKihetYgGtUXZErTeBKUHMZM4VoiC74AZdTBKZmDqQQztZC51REeDstpvCqiEqUWyoChJQ2tEJLEUzDrwlXDWcLR4xE/g9PrNJ4qubqJZ6Rr1iE7QgWL8BMDBVnQZzaGnzLCE60T9ZlzKKyqlR19ADmM1EWGfCAqGmkiZagG0RnzE+7INB6sFCJCwKzATsss+FlFoLZ4SQQY0nEfUFf4WF6GFkzjJS5AJRHGtcOYeGhdhqWiXwl3ocrAhlpYPKavysS8DHfN2GQQCsvQq8E/juKWQQorUQHlkButEDHGS7b/8u7ffgPdUwCrMwUAAA==",
+	                "approximateArrivalTimestamp": 1575424794.96
+	            },
+	            "eventSource": "aws:kinesis",
+	            "eventVersion": "1.0",
+	            "eventID": "shardId-000000000000:49601761752797083658832874449062197279326780636178415618",
+	            "eventName": "aws:kinesis:record",
+	            "invokeIdentityArn": "arn:aws:iam::581250858419:role/CloudWatchLogForwarderDem-DevNullLogShipperService-1SNPAKYBP6PBA",
+	            "awsRegion": "us-east-1",
+	            "eventSourceARN": "arn:aws:kinesis:us-east-1:581250858419:stream/CloudWatchLogForwarderDemo-ForwarderStreamC7ED6520-1RTX5J5CPJUO0"
+	        }
+	    ]
+	}
+	
+// After decoding the 'Records[].kinesis.data property, we get something that looks like this:
+
+   {
+       "messageType": "DATA_MESSAGE",
+       "owner": "581250858419",
+       "logGroup": "/aws/lambda/_maxLambdaTest5",
+       "logStream": "2019/12/04/[$LATEST]b174bbe83a0e4a888a9258a2af8d135d",
+       "subscriptionFilters": [
+           "ship-logs"
+       ],
+       "logEvents": [
+           {
+               "id": "35133146579007920926787992384424996801199968227752411136",
+               "timestamp": 1575424779138,
+               "message": "hello\n"
+           },
+           {
+               "id": "35133146596915419321208082767078178574136602517054685188",
+               "timestamp": 1575424779941,
+               "message": "hello\n"
+           },
+           {
+               "id": "35133146612726647666966294574427002829444290824794800136",
+               "timestamp": 1575424780650,
+               "message": "hello\n"
+           },
+           {
+               "id": "35133146628091861108753893918945112719299011902415306764",
+               "timestamp": 1575424781339,
+               "message": "hello\n"
+           },
+           {
+               "id": "35133146642252834309820839613820293822430721458712870928",
+               "timestamp": 1575424781974,
+               "message": "hello\n"
+           },
+           {
+               "id": "35133146655075762798975947920203331829203529324651610132",
+               "timestamp": 1575424782549,
+               "message": "hello\n"
+           },
+           {
+               "id": "35133146667185067441778076286057226851251589622398976024",
+               "timestamp": 1575424783092,
+               "message": "hello\n"
+           },
+           {
+               "id": "35133146683420009946308369933095229753739596798752718876",
+               "timestamp": 1575424783820,
+               "message": "hello\n"
+           },
+           {
+               "id": "35133146692764022184492701029398695709979260269758513184",
+               "timestamp": 1575424784239,
+               "message": "hello\n"
+           },
+           {
+               "id": "35133146707861626683897932896218376980562201009307254820",
+               "timestamp": 1575424784916,
+               "message": "hello\n"
+           }
+       ]
+   }
+

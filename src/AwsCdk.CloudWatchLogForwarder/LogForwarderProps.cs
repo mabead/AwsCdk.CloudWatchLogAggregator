@@ -4,6 +4,9 @@ using Amazon.CDK.AWS.Lambda;
 
 namespace AwsCdk.CloudWatchLogForwarder
 {
+    /// <summary>
+    /// The properties of the LogForwarder.
+    /// </summary>
     public class LogForwarderProps
     {
         /// <summary>
@@ -56,6 +59,8 @@ namespace AwsCdk.CloudWatchLogForwarder
         /// <param name="cloudWatchLogRetentionInDays"></param>
         /// <param name="logGroupsPrefix">The log forwarder will only manage the log groups that start with this prefix. Managing a log group implies: settings its retention policy and forwarding the logs to the log shipper lambda function. The default value is "/aws/lambda/".</param>
         /// <param name="cloudWatchLogsFilterPattern">Only the CloudWatch logs that respect this filter pattern will be forwarded to the log shipper lambda function. The default value is: -"START RequestId: " -"END RequestId: " -"REPORT RequestId: "</param>
+        /// <param name="kinesisBatchSize">The size of the batches that are sent from Kinesis to the Lambda. See https://docs.aws.amazon.com/cdk/api/latest/docs/@aws-cdk_aws-lambda-event-sources.KinesisEventSourceProps.html#batchsize for more details.</param>
+        /// <param name="kinesisMaxBatchingWindow">The maximum amount of time to gather records in the Kinesis data stream before invoking the log shipper function. See https://docs.aws.amazon.com/cdk/api/latest/docs/@aws-cdk_aws-lambda-event-sources.KinesisEventSourceProps.html#maxbatchingwindow for more details.</param>
         public LogForwarderProps
         (
             Function logShipper, 
@@ -73,7 +78,7 @@ namespace AwsCdk.CloudWatchLogForwarder
             LogGroupsPrefix = logGroupsPrefix;
             CloudWatchLogsFilterPattern = cloudWatchLogsFilterPattern;
             KinesisBatchSize = kinesisBatchSize;
-            KinesisMaxBatchingWindow = kinesisMaxBatchingWindow;
+            KinesisMaxBatchingWindow = kinesisMaxBatchingWindow ?? throw new System.ArgumentNullException(nameof(kinesisMaxBatchingWindow));
         }
     }
 }
