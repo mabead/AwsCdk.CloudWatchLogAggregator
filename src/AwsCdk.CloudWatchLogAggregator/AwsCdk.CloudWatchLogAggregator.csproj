@@ -10,14 +10,14 @@
     <Authors>mabead</Authors>
     <Company />
     <Product />
-    <RepositoryUrl>https://github.com/mabead/AwsCdk.CloudWatchLogForwarder</RepositoryUrl>
+    <RepositoryUrl>https://github.com/mabead/AwsCdk.CloudWatchLogAggregator</RepositoryUrl>
     <Title>AWS CDK CloudWatch Logs Forwarder</Title>
     <Description>This nuget contains an implementation of the "Centralised logging for AWS Lambda, REVISED (2018)" pattern described here https://theburningmonk.com/2018/07/centralised-logging-for-aws-lambda-revised-2018/. The pattern is implemented in a reusable AWS CDK Construct coded in C#. The nuget can be consumed by CDK projects that want to use this pattern.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <PackageTags>aws,cdk</PackageTags>
-    <DocumentationFile>bin\$(Configuration)\AwsCdk.CloudWatchLogForwarder.xml</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\AwsCdk.CloudWatchLogAggregator.xml</DocumentationFile>
     <AssemblyVersion>1.0.2.0</AssemblyVersion>
     <FileVersion>1.0.2.0</FileVersion>
     <Version>1.0.2</Version>

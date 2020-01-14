@@ -1,1 +1,1 @@
-# AwsCdk.CloudWatchLogForwarder
+# AwsCdk.CloudWatchLogAggregator

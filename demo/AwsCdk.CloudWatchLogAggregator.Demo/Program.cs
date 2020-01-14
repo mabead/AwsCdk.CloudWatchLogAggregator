@@ -1,6 +1,6 @@
 ﻿using Amazon.CDK;
 
-namespace AwsCdk.CloudWatchLogForwarder.Demo
+namespace AwsCdk.CloudWatchLogAggregator.Demo
 {
     public class DemoStack : Stack
     {
@@ -53,7 +53,7 @@ namespace AwsCdk.CloudWatchLogForwarder.Demo
         static void Main(string[] args)
         {
             var app = new App();
-            new DemoStack(app, "CloudWatchLogForwarderDemo", new StackProps
+            new DemoStack(app, "CloudWatchLogAggregatorDemo", new StackProps
             {
                 Env = new Amazon.CDK.Environment { Region = "us-east-1" },
             });

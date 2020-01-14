@@ -14,9 +14,9 @@
 	            "eventVersion": "1.0",
 	            "eventID": "shardId-000000000000:49601761752797083658832874449062197279326780636178415618",
 	            "eventName": "aws:kinesis:record",
-	            "invokeIdentityArn": "arn:aws:iam::581250858419:role/CloudWatchLogForwarderDem-DevNullLogShipperService-1SNPAKYBP6PBA",
+	            "invokeIdentityArn": "arn:aws:iam::581250858419:role/CloudWatchLogAggregatorDem-DevNullLogShipperService-1SNPAKYBP6PBA",
 	            "awsRegion": "us-east-1",
-	            "eventSourceARN": "arn:aws:kinesis:us-east-1:581250858419:stream/CloudWatchLogForwarderDemo-ForwarderStreamC7ED6520-1RTX5J5CPJUO0"
+	            "eventSourceARN": "arn:aws:kinesis:us-east-1:581250858419:stream/CloudWatchLogAggregatorDemo-ForwarderStreamC7ED6520-1RTX5J5CPJUO0"
 	        }
 	    ]
 	}

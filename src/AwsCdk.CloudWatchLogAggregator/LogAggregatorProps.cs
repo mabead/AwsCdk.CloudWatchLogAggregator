@@ -2,7 +2,7 @@
 using Amazon.CDK.AWS.Kinesis;
 using Amazon.CDK.AWS.Lambda;
 
-namespace AwsCdk.CloudWatchLogForwarder
+namespace AwsCdk.CloudWatchLogAggregator
 {
     /// <summary>
     /// The properties of the LogForwarder.

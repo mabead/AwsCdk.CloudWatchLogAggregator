@@ -6,7 +6,7 @@ using Amazon.CDK.AWS.Lambda;
 using Amazon.CDK.AWS.Lambda.EventSources;
 using System.Collections.Generic;
 
-namespace AwsCdk.CloudWatchLogForwarder
+namespace AwsCdk.CloudWatchLogAggregator
 {
     /// <summary>
     /// The 'LogForwarder' CDK construct is responsible to *create*
