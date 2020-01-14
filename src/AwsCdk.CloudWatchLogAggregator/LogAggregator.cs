@@ -9,7 +9,7 @@ using System.Collections.Generic;
 namespace AwsCdk.CloudWatchLogAggregator
 {
     /// <summary>
-    /// The 'LogForwarder' CDK construct is responsible to *create*
+    /// The 'LogAggregator' CDK construct is responsible to *create*
     /// the following AWS resources:
     /// 
     ///  - The Kinesis Data stream that will aggregate the CloudWatch logs

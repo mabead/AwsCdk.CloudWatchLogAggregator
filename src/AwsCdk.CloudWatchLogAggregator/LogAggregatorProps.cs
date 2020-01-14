@@ -24,7 +24,7 @@ namespace AwsCdk.CloudWatchLogAggregator
         public int? CloudWatchLogRetentionInDays { get; }
 
         /// <summary>
-        /// The log forwarder will only manage the log groups that start with this prefix. 
+        /// The log aggregator will only manage the log groups that start with this prefix. 
         /// Managing a log group implies: settings its retention policy and forwarding the 
         /// logs to the log shipper lambda function.
         /// </summary>
@@ -57,7 +57,7 @@ namespace AwsCdk.CloudWatchLogAggregator
         /// <param name="logShipper">The lambda that will be used to ship the logs aggregated in Kinesis to something like Loggly, splunk or logz.io.</param>
         /// <param name="kinesisStreamProps">See the 'KinesisStreamProps' property.</param>
         /// <param name="cloudWatchLogRetentionInDays">See the 'CloudWatchLogRetentionInDays' property.</param>
-        /// <param name="logGroupsPrefix">The log forwarder will only manage the log groups that start with this prefix. Managing a log group implies: settings its retention policy and forwarding the logs to the log shipper lambda function. The default value is "/aws/lambda/".</param>
+        /// <param name="logGroupsPrefix">The log aggregator will only manage the log groups that start with this prefix. Managing a log group implies: settings its retention policy and forwarding the logs to the log shipper lambda function. The default value is "/aws/lambda/".</param>
         /// <param name="cloudWatchLogsFilterPattern">Only the CloudWatch logs that respect this filter pattern will be forwarded to the log shipper lambda function. The default value is: -"START RequestId: " -"END RequestId: " -"REPORT RequestId: "</param>
         /// <param name="kinesisBatchSize">The size of the batches that are sent from Kinesis to the Lambda. See https://docs.aws.amazon.com/cdk/api/latest/docs/@aws-cdk_aws-lambda-event-sources.KinesisEventSourceProps.html#batchsize for more details.</param>
         /// <param name="kinesisMaxBatchingWindow">The maximum amount of time to gather records in the Kinesis data stream before invoking the log shipper function. See https://docs.aws.amazon.com/cdk/api/latest/docs/@aws-cdk_aws-lambda-event-sources.KinesisEventSourceProps.html#maxbatchingwindow for more details.</param>

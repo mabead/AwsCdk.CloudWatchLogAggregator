@@ -19,7 +19,7 @@ namespace AwsCdk.CloudWatchLogAggregator.Demo
 
             // Create our aggregator and connect it with our log
             // shipper lambda.
-            new LogAggregator(this, "Forwarder",
+            new LogAggregator(this, "Aggregator",
                 new LogAggregatorProps(
 
                     // The log shipper to connect to.
@@ -49,7 +49,7 @@ namespace AwsCdk.CloudWatchLogAggregator.Demo
                 // NOTE: 
                 //
                 // There are a few more parameters that are available.
-                // See the code of 'LogForwarderProps' for more details.
+                // See the code of 'LogAggregatorProps' for more details.
                 ));
         }
     }
