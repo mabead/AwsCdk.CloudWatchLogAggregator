@@ -20,7 +20,7 @@ namespace AwsCdk.CloudWatchLogAggregator
     ///  
     /// IMPORTANT NOTE: This construct assumes that CloudTrail is enabled in your AWS environment.
     /// </summary>
-    public class LogForwarder : Construct
+    public class LogAggregator : Construct
     {
         /// <summary>
         /// Constructor.
@@ -28,7 +28,7 @@ namespace AwsCdk.CloudWatchLogAggregator
         /// <param name="scope"></param>
         /// <param name="id"></param>
         /// <param name="props"></param>
-        public LogForwarder(Construct scope, string id, LogForwarderProps props)
+        public LogAggregator(Construct scope, string id, LogAggregatorProps props)
             : base(scope, id)
         {
             // The Kinesis stream that will receive all lambda logs.

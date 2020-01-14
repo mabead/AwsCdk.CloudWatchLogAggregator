@@ -5,9 +5,9 @@ using Amazon.CDK.AWS.Lambda;
 namespace AwsCdk.CloudWatchLogAggregator
 {
     /// <summary>
-    /// The properties of the LogForwarder.
+    /// The properties of the LogAggregator.
     /// </summary>
-    public class LogForwarderProps
+    public class LogAggregatorProps
     {
         /// <summary>
         /// The lambda that will be used to ship the logs aggregated in Kinesis to something like Loggly, splunk or logz.io.
@@ -61,7 +61,7 @@ namespace AwsCdk.CloudWatchLogAggregator
         /// <param name="cloudWatchLogsFilterPattern">Only the CloudWatch logs that respect this filter pattern will be forwarded to the log shipper lambda function. The default value is: -"START RequestId: " -"END RequestId: " -"REPORT RequestId: "</param>
         /// <param name="kinesisBatchSize">The size of the batches that are sent from Kinesis to the Lambda. See https://docs.aws.amazon.com/cdk/api/latest/docs/@aws-cdk_aws-lambda-event-sources.KinesisEventSourceProps.html#batchsize for more details.</param>
         /// <param name="kinesisMaxBatchingWindow">The maximum amount of time to gather records in the Kinesis data stream before invoking the log shipper function. See https://docs.aws.amazon.com/cdk/api/latest/docs/@aws-cdk_aws-lambda-event-sources.KinesisEventSourceProps.html#maxbatchingwindow for more details.</param>
-        public LogForwarderProps
+        public LogAggregatorProps
         (
             Function logShipper, 
             IStreamProps? kinesisStreamProps = null, 
