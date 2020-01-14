@@ -10,8 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\AwsCdk.CloudWatchLogForwarder\AwsCdk.CloudWatchLogForwarder.csproj" />
-    <!--<PackageReference Include="Amazon.Jsii.Analyzers" Version="0.21.1" PrivateAssets="all" />-->
+    <PackageReference Include="AwsCdk.CloudWatchLogForwarder" Version="1.0.2" />
   </ItemGroup>
 
 </Project>

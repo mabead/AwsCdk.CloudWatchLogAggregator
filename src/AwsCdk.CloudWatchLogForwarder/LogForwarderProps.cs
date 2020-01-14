@@ -78,7 +78,7 @@ namespace AwsCdk.CloudWatchLogForwarder
             LogGroupsPrefix = logGroupsPrefix;
             CloudWatchLogsFilterPattern = cloudWatchLogsFilterPattern;
             KinesisBatchSize = kinesisBatchSize;
-            KinesisMaxBatchingWindow = kinesisMaxBatchingWindow ?? throw new System.ArgumentNullException(nameof(kinesisMaxBatchingWindow));
+            KinesisMaxBatchingWindow = kinesisMaxBatchingWindow;
         }
     }
 }
