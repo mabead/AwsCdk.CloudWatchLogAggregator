@@ -86,6 +86,15 @@ namespace AwsCdk.CloudWatchLogAggregator
                     Code = Code.FromInline(EmbeddedResourceReader.Read("Resources.SetExpiry.js"))
                 });
 
+                // This lambda must be able to change the logs retention policy.
+                setLogGroupExpirationLambda.AddToRolePolicy(new PolicyStatement(new PolicyStatementProps
+                {
+                    Effect = Effect.ALLOW,
+                    Actions = new[] { "logs:PutRetentionPolicy" },
+                    Resources = new[] { "*" },
+                }));
+
+                // This lambda should be invoked automatically when a log group is created.
                 createLogGroupEventRule.AddTarget(new LambdaFunction(setLogGroupExpirationLambda));
             }
 
