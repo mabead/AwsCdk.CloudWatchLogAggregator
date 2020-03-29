@@ -19,6 +19,9 @@ jobs:
     - name: Run docker
       run: docker ps && docker info    
     
+    - name: Docker in docker
+      run: docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock docker:19.03 docker ps
+    
     - name: Install GitVersion
       uses: gittools/actions/gitversion/setup@v0.9
       with:
