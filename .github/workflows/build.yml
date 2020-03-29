@@ -31,7 +31,7 @@ jobs:
       run: dotnet restore
     - 
       name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2}}
     - 
       name: Test
       run: dotnet test --no-restore --verbosity normal
