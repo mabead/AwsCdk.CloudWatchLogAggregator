@@ -12,10 +12,13 @@ jobs:
     
     - name: Fetch all history for all tags and branches
       run: git fetch --prune --unshallow
+    
+    - name: Start redis
+      run: docker run --rm --detach -p 6379:6379 --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest
       
     - name: Run docker
-      run: docker ps && docker info
-        
+      run: docker ps && docker info    
+    
     - name: Install GitVersion
       uses: gittools/actions/gitversion/setup@v0.9
       with:
