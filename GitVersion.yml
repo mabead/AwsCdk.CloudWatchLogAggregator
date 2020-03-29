@@ -1,0 +1,8 @@
+major-version-bump-message: '(breaking|major)\(.*\)\s*\:'
+minor-version-bump-message: '(feat|minor)\(.*\)\s*\:'
+patch-version-bump-message: '(fix|patch)\(.*\)\s*\:'
+commit-message-incrementing: Disabled
+mode: Mainline
+branches: {}
+ignore:
+  sha: []
