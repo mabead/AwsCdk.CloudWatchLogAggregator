@@ -33,5 +33,8 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2}}
     
+    - name: Pack
+      run: dotnet pack ./src/AwsCdk.CloudWatchLogAggregator/AwsCdk.CloudWatchLogAggregator.csproj --configuration Release --no-build /p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2}}
+      
     - name: Test
       run: dotnet test --no-restore --verbosity normal
