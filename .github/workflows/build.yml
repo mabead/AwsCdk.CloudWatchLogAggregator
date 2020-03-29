@@ -29,9 +29,9 @@ jobs:
       
     - name: Install dependencies
       run: dotnet restore
-    - 
-      name: Build
+    
+    - name: Build
       run: dotnet build --configuration Release --no-restore /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2}}
-    - 
-      name: Test
+    
+    - name: Test
       run: dotnet test --no-restore --verbosity normal
