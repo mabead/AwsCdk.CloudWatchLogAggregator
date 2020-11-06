@@ -1,6 +1,6 @@
 # AwsCdk.CloudWatchLogAggregator
 
-This repository contains a C# AWS CDK custom construct (the `LogAggregator`) that makes it easy to centralize the logs of all your AWS lambdas into a single Kinesis Data Stream. The content of this Kinesis Data Stream is then forwarded to an external logging system like Loggly, Splunk or logz.io by invoking a custom lambda provided by the consumer. 
+This repository contains a C# AWS CDK custom construct (the `LogAggregator`) that makes it easy to centralize the logs of all your AWS lambdas into a single Kinesis Data Stream. The content of this Kinesis Data Stream is then forwarded to an external logging system like Loggly, Splunk, Logit.io or logz.io by invoking a custom lambda provided by the consumer. 
 In other words, the repository contains a CDK based implementation of [this pattern](https://theburningmonk.com/2018/07/centralised-logging-for-aws-lambda-revised-2018/). 
 
 For more details on the `LogAggregator` you can either:
